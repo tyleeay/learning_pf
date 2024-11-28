@@ -1,5 +1,13 @@
 import streamlit as st
 import pandas as pd
+from PIL import Image
+
+def load_image(image_path):
+    try:
+        return Image.open(image_path)
+    except FileNotFoundError:
+        st.error(f"Image not found: {image_path}")
+        return None
 
 def main():
     st.set_page_config(
@@ -330,6 +338,12 @@ def show_presentation_one():
     
     with tabs[0]:
         st.subheader("Practice Recording")
+
+        profile_image = load_image("images/IMG_1298.JPG")
+
+        if profile_image:
+            st.image(profile_image, caption="Profile Picture", use_column_width=True)
+
         st.markdown(f"""
             <div class="video-container">
                 <h4>Practice Session Recording</h4>
@@ -411,21 +425,22 @@ def show_presentation_one():
 
     with tabs[3]:
         st.title("Peer Evaluation")
-        st.subheader("Evaluating: Federico")
         
         # Body Language Evaluation Form
         with st.expander("Delivery (Body Language) Evaluation", expanded=True):
+
             st.markdown("""
-            <div class='evaluation-form'>
-            <h3 style='color: #333; margin-bottom: 20px;'>LABU2040 Oral Presentation Peer Evaluation (delivery)</h3>
+                <div style='border: 1px solid #ddd; padding: 2rem; border-radius: 20px; margin: 2rem 0; min-height: 25px;'>
+                    <h3 style='color: #333; margin: 0;'>LABU2040 Oral Presentation Peer Evaluation (delivery)</h3>
+                </div>
             """, unsafe_allow_html=True)
-            
+                    
             st.markdown("**Evaluator:** Lee Te Ying, David")
             st.markdown("**Presenter:** Federico")
             
-            st.markdown("### Delivery (body language)")
+            st.markdown("### Delivery (Body Language)")
             
-            st.markdown("**Overall impression for delivery:** Very Good (VG)")
+            st.markdown("**Overall Impression for Delivery:** Very Good (VG)")
 
             # Question 1
             st.markdown("""
@@ -473,7 +488,7 @@ def show_presentation_one():
             
             st.markdown("""
             <div class='learning-strategy'>
-                <strong>Learning / Practicing strategy suggestion:</strong><br/>
+                <strong>Learning / Practicing Strategy Suggestion:</strong><br/>
                 As someone who had the privilege of working with Federico, I would like to share some collaborative suggestions that could help both of us enhance our presentation skills further. Building on Federico's already strong foundation, we could practice together using these strategies:
                 <ul>
                     <li>Perhaps we could schedule some joint practice sessions where we can give each other real-time feedback on our movements and gestures</li>
@@ -483,6 +498,10 @@ def show_presentation_one():
                 These suggestions come from a place of mutual learning, as I believe we can both benefit from exchanging feedback and strategies.
             </div>
             """, unsafe_allow_html=True)
+
+            st.markdown("### Language (Use of Voice)")
+            
+            st.markdown("**Overall Impression for Use of Voice:** Very Good (VG)")
 
             # Question 1
             st.markdown("""
@@ -530,7 +549,7 @@ def show_presentation_one():
             
             st.markdown("""
             <div class='learning-strategy'>
-                <strong>Learning / Practicing strategy suggestion:</strong><br/>
+                <strong>Learning / Practicing Strategy Suggestion:</strong><br/>
                 As teammates working together toward excellence in presentation skills, I'd like to share some collaborative suggestions that could benefit our entire group:
                 <ol>
                     <li>We could practice our presentations together, using our combined allocated time to ensure we're each maximizing our individual portions while maintaining a cohesive group flow</li>
@@ -545,7 +564,14 @@ def show_presentation_two():
     st.title("Oral Presentation 2: Demonstrating Growth")
     
     with st.expander("Applied Learning & Development", expanded=True):
+
         st.subheader("Final Presentation")
+
+        profile_image = load_image("images/IMG_1297.JPG")
+
+        if profile_image:
+            st.image(profile_image, caption="Profile Picture", use_column_width=True)
+
         st.markdown("""
         <div class="video-container">
             <h4>Enhanced Presentation Skills Demonstration</h4>

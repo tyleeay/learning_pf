@@ -220,54 +220,66 @@ def main():
 
     st.markdown("""
         <style>
-        /* Navigation Styling */
-        .st-emotion-cache-79elbk {
-            position: relative;
-            padding: 0;
+        /* Hide radio buttons but keep labels clickable */
+        div[data-testid="stSidebarNav"] div[role="radiogroup"] label {
+            cursor: pointer;
+            width: 100%;
+            padding: 0.5rem;
+            display: block;
         }
-
-        /* Radio Button Container */
-        .st-emotion-cache-1vbkxwb {
-            margin: 1rem 0;
+        
+        /* Hide the actual radio button */
+        div[data-testid="stSidebarNav"] div[role="radiogroup"] input[type="radio"] {
+            display: none;
         }
-
-        /* Individual Radio Button Item */
-        .st-emotion-cache-1vbkxwb > div {
-            margin: 4.5rem 0;  /* Increased vertical spacing between items */
-            padding: 0.5rem 0;  /* Added padding within each item */
-        }
-
-        /* Radio Label Text */
-        .st-emotion-cache-1vbkxwb label {
-            padding: 0.5rem 0;
+        
+        /* Style for the text */
+        div[data-testid="stSidebarNav"] div[role="radiogroup"] label span p {
             font-size: 1rem;
-            line-height: 1.4;
+            margin: 0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        /* Hover effect */
+        div[data-testid="stSidebarNav"] div[role="radiogroup"] label:hover span p {
+            background-color: rgba(151, 166, 195, 0.15);
         }
 
-        /* Active Radio Item */
-        .st-emotion-cache-1vbkxwb .st-emotion-cache-15zrgzn {
-            padding: 0.5rem 0;
+        /* Remove default container styles */
+        section[data-testid="stSidebar"] > div {
+            padding-top: 2rem;
         }
 
-        /* Rest of your existing styles... */
+        /* Hide top padding in radio group */
+        div[role="radiogroup"] > div {
+            margin-top: 0 !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
-    # Sidebar with improved styling
+    # Sidebar navigation
     with st.sidebar:
-        st.title("📑 Navigation")
-        page = st.radio("", [
-            "Learning Journey Overview",
-            "Oral Presentation 1",
-            "Oral Presentation 2",
-            "Development & Reflections"
-        ])
+        st.title("Navigation")
+        
+        # Create navigation using radio buttons
+        selected_page = st.radio(
+            label="Navigation",
+            options=[
+                "Learning Journey Overview",
+                "Oral Presentation 1",
+                "Oral Presentation 2",
+                "Development & Reflections"
+            ],
+            label_visibility="collapsed"
+        )
 
-    if page == "Learning Journey Overview":
+    # Display the selected page
+    if selected_page == "Learning Journey Overview":
         show_overview()
-    elif page == "Oral Presentation 1":
+    elif selected_page == "Oral Presentation 1":
         show_presentation_one()
-    elif page == "Oral Presentation 2":
+    elif selected_page == "Oral Presentation 2":
         show_presentation_two()
     else:
         show_development()
@@ -339,10 +351,10 @@ def show_presentation_one():
     with tabs[0]:
         st.subheader("Practice Recording")
 
-        profile_image = load_image("images/IMG_1298.JPG")
+        profile_image = load_image("images/IMG_1298.jpg")
 
         if profile_image:
-            st.image(profile_image, caption="Profile Picture", use_column_width=True)
+            st.image(profile_image, caption="Case 1 Presentation Group", use_column_width=True)
 
         st.markdown(f"""
             <div class="video-container">
@@ -567,10 +579,10 @@ def show_presentation_two():
 
         st.subheader("Final Presentation")
 
-        profile_image = load_image("images/IMG_1297.JPG")
+        profile_image = load_image("images/IMG_1297.jpg")
 
         if profile_image:
-            st.image(profile_image, caption="Profile Picture", use_column_width=True)
+            st.image(profile_image, caption="Case 2 Presentation Group", use_column_width=True)
 
         st.markdown("""
         <div class="video-container">
